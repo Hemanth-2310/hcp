@@ -20,8 +20,8 @@ resource "aws_subnet" "two" {
 
 resource "aws_instance" "three" {
   subnet_id     = aws_subnet.two.id
-  ami           = "ami-0866a3c8686eaeeba"
-  instance_type = "t2.micro"
+  ami           = "ami-052064a798f08f0d3"
+  instance_type = "t3.micro"
   tags = {
     Name = "dev-server"
   }
