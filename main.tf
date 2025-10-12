@@ -19,7 +19,7 @@ resource "aws_subnet" "two" {
 }
 
 resource "aws_instance" "three" {
-  count         = 2
+  count         = 3
   subnet_id     = aws_subnet.two.id
   ami           = "ami-052064a798f08f0d3"
   instance_type = "t3.micro"
