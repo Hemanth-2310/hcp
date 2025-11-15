@@ -10,7 +10,7 @@ variable "instance_names" {
 resource "aws_instance" "one" {
   count                  = 4
   ami                    = "ami-03695d52f0d883f65"
-  instance_type          = "t3.micro"
+  instance_type          = "t2.micro"
   key_name               = "saikeypair"
   vpc_security_group_ids = ["sg-0b41495a016b8f79d"]
 
