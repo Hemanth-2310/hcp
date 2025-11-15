@@ -18,12 +18,13 @@ resource "aws_subnet" "two" {
   }
 }
 
-resource "aws_instance" "Four" {
+resource "aws_instance" "three" {
   count         = 4
-  subnet_id     = aws_subnet.four.id
+  subnet_id     = aws_subnet.two.id
   ami           = "ami-052064a798f08f0d3"
   instance_type = "t3.micro"
   tags = {
-    Name = 'dev-server','test-server','workload','monitoring'
+    Name = "dev-server"
   }
 }
+
