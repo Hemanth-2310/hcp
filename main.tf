@@ -24,6 +24,6 @@ resource "aws_instance" "three" {
   ami           = "ami-052064a798f08f0d3"
   instance_type = "t3.micro"
   tags = {
-    Name = ["dev-server",test-server","workload","monitoring"]
+    Name = "dev-server",test-server","workload","monitoring"
   }
 }
