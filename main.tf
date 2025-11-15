@@ -1,30 +1,18 @@
 provider "aws" {
-region = "us-east-1"
+  region = "us-east-1"
 }
 
-resource "aws_vpc" "one" {
-  cidr_block = "10.0.0.0/16"
+resource "aws_instance" "one" {
+  count                  = 4
+  ami                    = "ami-03695d52f0d883f65 "
+  instance_type          = "t3.micro"
+  key_name               = "Hemanth"
+  vpc_security_group_ids = ["sg-0b41495a016b8f79d"]
   tags = {
-    Name = "dev-vpc"
+    Name = var.instance_names[count.index]
   }
 }
 
-resource "aws_subnet" "two" {
-  vpc_id     = aws_vpc.one.id
-  cidr_block = "10.0.1.0/24"
-
-  tags = {
-    Name = "dev-subent"
-  }
+variable "instance_names" {
+  default = ["jenkins", "tomcat-1", "tomcat-2", "Monitoring server"]
 }
-
-resource "aws_instance" "three" {
-  count         = 2
-  subnet_id     = aws_subnet.two.id
-  ami           = "ami-052064a798f08f0d3"
-  instance_type = "t3.micro"
-  tags = {
-    Name = "dev-server"
-  }
-}
-
