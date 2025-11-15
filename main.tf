@@ -1,8 +1,17 @@
+provider "aws" {
+  region = "us-east-1"
+}
+
+variable "instance_names" {
+  type    = list(string)
+  default = ["jenkins", "tomcat-1", "tomcat-2", "monitoring-server"]
+}
+
 resource "aws_instance" "one" {
   count                  = 4
-  ami                    = "ami-0c02fb55956c7d316"  
+  ami                    = "ami-03695d52f0d883f65"
   instance_type          = "t3.micro"
-  key_name               = "sai key pair"
+  key_name               = "saikeypair"
   vpc_security_group_ids = ["sg-0b41495a016b8f79d"]
 
   tags = {
