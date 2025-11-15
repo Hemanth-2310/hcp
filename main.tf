@@ -4,11 +4,11 @@ provider "aws" {
 
 variable "instance_names" {
   type    = list(string)
-  default = ["jenkins", "tomcat-1", "tomcat-2", "monitoring-server"]
+  default = ["jenkins", "tomcat-1"]
 }
 
 resource "aws_instance" "one" {
-  count                  = 4
+  count                  = 2
   ami                    = "ami-03695d52f0d883f65"
   instance_type          = "t2.micro"
   key_name               = "saikeypair"
