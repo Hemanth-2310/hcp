@@ -1,20 +1,29 @@
 provider "aws" {
-  region = "us-east-1"
+region = "us-east-1"
 }
 
-variable "instance_names" {
-  type    = list(string)
-  default = ["jenkins", "tomcat-1"]
+resource "aws_vpc" "one" {
+  cidr_block = "10.0.0.0/16"
+  tags = {
+    Name = "dev-vpc"
+  }
 }
 
-resource "aws_instance" "one" {
-  count                  = 2
-  ami                    = "ami-03695d52f0d883f65"
-  instance_type          = "t2.micro"
-  key_name               = "saikeypair"
-  vpc_security_group_ids = ["sg-0b41495a016b8f79d"]
+resource "aws_subnet" "two" {
+  vpc_id     = aws_vpc.one.id
+  cidr_block = "10.0.1.0/24"
 
   tags = {
-    Name = var.instance_names[count.index]
+    Name = "dev-subent"
+  }
+}
+
+resource "aws_instance" "three" {
+  count         = 4
+  subnet_id     = aws_subnet.two.id
+  ami           = "ami-052064a798f08f0d3"
+  instance_type = "t3.micro"
+  tags = {
+    Name = ["dev-server",test-server","workload","monitoring"]
   }
 }
