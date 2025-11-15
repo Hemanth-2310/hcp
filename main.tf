@@ -4,7 +4,7 @@ provider "aws" {
 
 resource "aws_instance" "one" {
   count                  = 4
-  ami                    = "ami-03695d52f0d883f65 "
+  ami                    = "ami-03695d52f0d883f65"
   instance_type          = "t3.micro"
   key_name               = "Hemanth"
   vpc_security_group_ids = ["sg-0b41495a016b8f79d"]
